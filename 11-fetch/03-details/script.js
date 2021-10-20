@@ -16,23 +16,32 @@
     const inputID = document.querySelector("#hero-id")
 
     function selectedXMen(array, id){
-        array.forEach(element => {
 
-            if (element.id === id){
-                let cloneTemplate = document.importNode(tpl.content, true)
+        return new Promise((idFound)=>{
+            array.forEach(element => {
     
-                let name = cloneTemplate.querySelector(".name")
-                let alter_ego = cloneTemplate.querySelector(".alter-ego")
-                let powers = cloneTemplate.querySelector(".powers")
-
-                name.textContent = element.name
-                alter_ego.textContent = element.alterEgo
-                powers.textContent = element.abilities
-
-                target.appendChild(cloneTemplate)
-            }
+                if (element.id === id){
+                    idFound(element.id)
+                    
+                    let cloneTemplate = document.importNode(tpl.content, true)
+        
+                    let name = cloneTemplate.querySelector(".name")
+                    let alter_ego = cloneTemplate.querySelector(".alter-ego")
+                    let powers = cloneTemplate.querySelector(".powers")
+    
+                    name.textContent = element.name
+                    alter_ego.textContent = element.alterEgo
+                    powers.textContent = element.abilities
+    
+                    target.appendChild(cloneTemplate)
+                }
+                
+            });
             
-        });
+            idFound()
+
+        })
+
         
     }
 
@@ -49,29 +58,15 @@
 
             try {
                 let responseInJson = await response.json()
-                selectedXMen(responseInJson,id)
+                let result = await selectedXMen(responseInJson,id)
+
+                if(result===undefined) alert("This id does not correspond to any X-Men")
 
             } catch (error) {
                 console.error(error)
             }
 
         }
-
-        
-        
-        /* for(let element of responseInJson){
-            let cloneTemplate = document.importNode(tpl.content, true)
-    
-            let name = cloneTemplate.querySelector(".name")
-            let alter_ego = cloneTemplate.querySelector(".alter-ego")
-            let powers = cloneTemplate.querySelector(".powers")
-
-            name.textContent = element.name
-            alter_ego.textContent = element.alterEgo
-            powers.textContent = element.abilities
-
-            target.appendChild(cloneTemplate)
-        } */
         
     });
 

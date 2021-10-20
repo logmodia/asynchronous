@@ -12,14 +12,16 @@
 (() => {
     // click 
     document.querySelector("#run").addEventListener("click", () => {
-        window.lib.getPosts().then(
+        window.lib.getPosts()
+        .then(
             // Your code here
             (resolve)=>{
                 console.log(resolve)
             }
-    ).catch((error)=>{
-        console.error(error);
-    })
+        )
+        .catch((error)=>{
+            console.error(error);
+        })
     })
     
 })();

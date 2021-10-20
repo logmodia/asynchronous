@@ -23,11 +23,11 @@
         let responseInJson = await response.json()
 
         responseInJson.forEach(element => {
-            console.log(element.name, element.alterEgo, element.abilities)
+            console.log(`Name : ${element.name}, Alter ego : ${element.alterEgo}, Powers : ${element.abilities}`)
             
         });
         
-        //Promise
+        //Promise``
         //fetch("http://localhost:3000/heroes").then((response) => response.json().then(x=>console.log(x)))
 
         /* console.log(
